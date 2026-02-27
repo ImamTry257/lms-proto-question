@@ -1,0 +1,93 @@
+// =================
+// question.proto
+syntax = "proto3";
+
+package question.v2;
+
+option go_package = "github.com/ImamTry257/lms-proto-question/gen/go/question;questionpbv2";
+
+import "google/protobuf/timestamp.proto";
+
+message ListQuestionRequest {
+    int32 page = 1;
+    int32 size = 2;
+    string search = 3;
+    string status = 4;
+}
+
+message GetQuestionByIdRequest {
+    int32 id = 1;
+}
+
+message GetQuestionByUuidRequest {
+    string id_ = 1;
+}
+
+message QuestionRequest {
+    string uuid = 1;
+    string name = 2;
+    string merchant_id = 3;
+    string lesson_id = 4;
+    string number = 5;
+    string description = 6;
+    string options = 7;
+    string options_with_reason = 8;
+    string status = 9;
+    string created_by = 10;
+    string updated_by = 11; 
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}
+
+message QuestionResponse {
+    string uuid = 1;
+    string name = 2;
+    string merchant_id = 3;
+    string lesson_id = 4;
+    string number = 5;
+    string description = 6;
+    string options = 7;
+    string options_with_reason = 8;
+    string status = 9;
+    string created_by = 10;
+    string updated_by = 11; 
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}
+
+
+message QuestionNameResponse {
+    string uuid = 1;
+    string name = 2;
+}
+
+message ListQuestionNameResponse {
+    repeated QuestionNameResponse data = 1;
+}
+
+message ListQuestionResponse {
+    repeated QuestionResponse data = 1;
+    int32 page = 2;
+    int32 size = 3;
+    int32 total_items = 4;
+    int32 total_pages = 5;
+}
+
+message ActionQuestionResponse {
+    bool is_success = 1;
+}
+
+message GetQuestionPICByUuidRequest {
+    string id_ = 1;
+}
+
+service QuestionService {
+    // Question
+    rpc GetAll(ListQuestionRequest) returns (ListQuestionResponse);
+    rpc GetAllQuestionName(ListQuestionRequest) returns (ListQuestionNameResponse);
+    rpc Create(QuestionRequest) returns (ActionQuestionResponse);
+    rpc Update(QuestionRequest) returns (ActionQuestionResponse);
+    rpc GetById(GetQuestionByIdRequest) returns (QuestionResponse);
+    rpc GetByUuid(GetQuestionByUuidRequest) returns (QuestionResponse);
+    rpc Delete(GetQuestionByUuidRequest) returns (ActionQuestionResponse);
+}
