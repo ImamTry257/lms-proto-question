@@ -25,6 +25,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Question
 type ListQuestionRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
@@ -186,16 +187,18 @@ type QuestionRequest struct {
 	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
 	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	LessonId          string                 `protobuf:"bytes,4,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
-	Number            string                 `protobuf:"bytes,5,opt,name=number,proto3" json:"number,omitempty"`
-	Description       string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Options           string                 `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
-	OptionsWithReason string                 `protobuf:"bytes,8,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
-	Status            string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedBy         string                 `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	UpdatedBy         string                 `protobuf:"bytes,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ClassId           string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId          string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	Number            int32                  `protobuf:"varint,6,opt,name=number,proto3" json:"number,omitempty"`
+	Description       string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Options           string                 `protobuf:"bytes,8,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason string                 `protobuf:"bytes,9,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status            string                 `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string                 `protobuf:"bytes,12,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -251,6 +254,13 @@ func (x *QuestionRequest) GetMerchantId() string {
 	return ""
 }
 
+func (x *QuestionRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
 func (x *QuestionRequest) GetLessonId() string {
 	if x != nil {
 		return x.LessonId
@@ -258,11 +268,11 @@ func (x *QuestionRequest) GetLessonId() string {
 	return ""
 }
 
-func (x *QuestionRequest) GetNumber() string {
+func (x *QuestionRequest) GetNumber() int32 {
 	if x != nil {
 		return x.Number
 	}
-	return ""
+	return 0
 }
 
 func (x *QuestionRequest) GetDescription() string {
@@ -321,23 +331,34 @@ func (x *QuestionRequest) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *QuestionRequest) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
 type QuestionResponse struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
-	LessonId          string                 `protobuf:"bytes,4,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
-	Number            string                 `protobuf:"bytes,5,opt,name=number,proto3" json:"number,omitempty"`
-	Description       string                 `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
-	Options           string                 `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
-	OptionsWithReason string                 `protobuf:"bytes,8,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
-	Status            string                 `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedBy         string                 `protobuf:"bytes,10,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
-	UpdatedBy         string                 `protobuf:"bytes,11,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state              protoimpl.MessageState       `protogen:"open.v1"`
+	Uuid               string                       `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name               string                       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId         string                       `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId            string                       `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId           string                       `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	Number             int32                        `protobuf:"varint,6,opt,name=number,proto3" json:"number,omitempty"`
+	Description        string                       `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Options            string                       `protobuf:"bytes,8,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason  string                       `protobuf:"bytes,9,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status             string                       `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy          string                       `protobuf:"bytes,11,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy          string                       `protobuf:"bytes,12,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt          *timestamppb.Timestamp       `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt          *timestamppb.Timestamp       `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt          *timestamppb.Timestamp       `protobuf:"bytes,15,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	QuestionAnswerKeys []*QuestionAnswerKeyResponse `protobuf:"bytes,16,rep,name=question_answer_keys,json=questionAnswerKeys,proto3" json:"question_answer_keys,omitempty"`
+	QuestionSettings   []*QuestionSettingResponse   `protobuf:"bytes,17,rep,name=question_settings,json=questionSettings,proto3" json:"question_settings,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *QuestionResponse) Reset() {
@@ -391,6 +412,13 @@ func (x *QuestionResponse) GetMerchantId() string {
 	return ""
 }
 
+func (x *QuestionResponse) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
 func (x *QuestionResponse) GetLessonId() string {
 	if x != nil {
 		return x.LessonId
@@ -398,11 +426,11 @@ func (x *QuestionResponse) GetLessonId() string {
 	return ""
 }
 
-func (x *QuestionResponse) GetNumber() string {
+func (x *QuestionResponse) GetNumber() int32 {
 	if x != nil {
 		return x.Number
 	}
-	return ""
+	return 0
 }
 
 func (x *QuestionResponse) GetDescription() string {
@@ -461,105 +489,30 @@ func (x *QuestionResponse) GetUpdatedAt() *timestamppb.Timestamp {
 	return nil
 }
 
-type QuestionNameResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
-	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *QuestionNameResponse) Reset() {
-	*x = QuestionNameResponse{}
-	mi := &file_question_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *QuestionNameResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*QuestionNameResponse) ProtoMessage() {}
-
-func (x *QuestionNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_question_proto_msgTypes[5]
+func (x *QuestionResponse) GetDeletedAt() *timestamppb.Timestamp {
 	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+		return x.DeletedAt
 	}
-	return mi.MessageOf(x)
+	return nil
 }
 
-// Deprecated: Use QuestionNameResponse.ProtoReflect.Descriptor instead.
-func (*QuestionNameResponse) Descriptor() ([]byte, []int) {
-	return file_question_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *QuestionNameResponse) GetUuid() string {
+func (x *QuestionResponse) GetQuestionAnswerKeys() []*QuestionAnswerKeyResponse {
 	if x != nil {
-		return x.Uuid
+		return x.QuestionAnswerKeys
 	}
-	return ""
+	return nil
 }
 
-func (x *QuestionNameResponse) GetName() string {
+func (x *QuestionResponse) GetQuestionSettings() []*QuestionSettingResponse {
 	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-type ListQuestionNameResponse struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Data          []*QuestionNameResponse `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ListQuestionNameResponse) Reset() {
-	*x = ListQuestionNameResponse{}
-	mi := &file_question_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ListQuestionNameResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListQuestionNameResponse) ProtoMessage() {}
-
-func (x *ListQuestionNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_question_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListQuestionNameResponse.ProtoReflect.Descriptor instead.
-func (*ListQuestionNameResponse) Descriptor() ([]byte, []int) {
-	return file_question_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *ListQuestionNameResponse) GetData() []*QuestionNameResponse {
-	if x != nil {
-		return x.Data
+		return x.QuestionSettings
 	}
 	return nil
 }
 
 type ListQuestionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          []*QuestionResponse    `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Contents      []*QuestionResponse    `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
 	Page          int32                  `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
 	Size          int32                  `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
 	TotalItems    int32                  `protobuf:"varint,4,opt,name=total_items,json=totalItems,proto3" json:"total_items,omitempty"`
@@ -570,7 +523,7 @@ type ListQuestionResponse struct {
 
 func (x *ListQuestionResponse) Reset() {
 	*x = ListQuestionResponse{}
-	mi := &file_question_proto_msgTypes[7]
+	mi := &file_question_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -582,7 +535,7 @@ func (x *ListQuestionResponse) String() string {
 func (*ListQuestionResponse) ProtoMessage() {}
 
 func (x *ListQuestionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_question_proto_msgTypes[7]
+	mi := &file_question_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,12 +548,12 @@ func (x *ListQuestionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListQuestionResponse.ProtoReflect.Descriptor instead.
 func (*ListQuestionResponse) Descriptor() ([]byte, []int) {
-	return file_question_proto_rawDescGZIP(), []int{7}
+	return file_question_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *ListQuestionResponse) GetData() []*QuestionResponse {
+func (x *ListQuestionResponse) GetContents() []*QuestionResponse {
 	if x != nil {
-		return x.Data
+		return x.Contents
 	}
 	return nil
 }
@@ -633,6 +586,1873 @@ func (x *ListQuestionResponse) GetTotalPages() int32 {
 	return 0
 }
 
+// Question Setting
+type ListQuestionSettingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int32                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionSettingRequest) Reset() {
+	*x = ListQuestionSettingRequest{}
+	mi := &file_question_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionSettingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionSettingRequest) ProtoMessage() {}
+
+func (x *ListQuestionSettingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionSettingRequest.ProtoReflect.Descriptor instead.
+func (*ListQuestionSettingRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListQuestionSettingRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionSettingRequest) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionSettingRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *ListQuestionSettingRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type GetQuestionSettingByIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionSettingByIdRequest) Reset() {
+	*x = GetQuestionSettingByIdRequest{}
+	mi := &file_question_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionSettingByIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionSettingByIdRequest) ProtoMessage() {}
+
+func (x *GetQuestionSettingByIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionSettingByIdRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionSettingByIdRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetQuestionSettingByIdRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetQuestionSettingByUuidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id_           string                 `protobuf:"bytes,1,opt,name=id_,json=id,proto3" json:"id_,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionSettingByUuidRequest) Reset() {
+	*x = GetQuestionSettingByUuidRequest{}
+	mi := &file_question_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionSettingByUuidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionSettingByUuidRequest) ProtoMessage() {}
+
+func (x *GetQuestionSettingByUuidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionSettingByUuidRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionSettingByUuidRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *GetQuestionSettingByUuidRequest) GetId_() string {
+	if x != nil {
+		return x.Id_
+	}
+	return ""
+}
+
+type QuestionSettingRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId           string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId          string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId  string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	Title             string                 `protobuf:"bytes,7,opt,name=title,proto3" json:"title,omitempty"`
+	Duration          string                 `protobuf:"bytes,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	Options           string                 `protobuf:"bytes,9,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason string                 `protobuf:"bytes,10,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status            string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string                 `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt         *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *QuestionSettingRequest) Reset() {
+	*x = QuestionSettingRequest{}
+	mi := &file_question_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionSettingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionSettingRequest) ProtoMessage() {}
+
+func (x *QuestionSettingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionSettingRequest.ProtoReflect.Descriptor instead.
+func (*QuestionSettingRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *QuestionSettingRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetDuration() string {
+	if x != nil {
+		return x.Duration
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetOptions() string {
+	if x != nil {
+		return x.Options
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetOptionsWithReason() string {
+	if x != nil {
+		return x.OptionsWithReason
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionSettingRequest) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionSettingRequest) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionSettingRequest) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type QuestionSettingResponse struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId           string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId          string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId  string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	Number            string                 `protobuf:"bytes,7,opt,name=number,proto3" json:"number,omitempty"`
+	Duration          string                 `protobuf:"bytes,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	Options           string                 `protobuf:"bytes,9,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason string                 `protobuf:"bytes,10,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status            string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string                 `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt         *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *QuestionSettingResponse) Reset() {
+	*x = QuestionSettingResponse{}
+	mi := &file_question_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionSettingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionSettingResponse) ProtoMessage() {}
+
+func (x *QuestionSettingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionSettingResponse.ProtoReflect.Descriptor instead.
+func (*QuestionSettingResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *QuestionSettingResponse) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetNumber() string {
+	if x != nil {
+		return x.Number
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetDuration() string {
+	if x != nil {
+		return x.Duration
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetOptions() string {
+	if x != nil {
+		return x.Options
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetOptionsWithReason() string {
+	if x != nil {
+		return x.OptionsWithReason
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionSettingResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionSettingResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionSettingResponse) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type ListQuestionSettingResponse struct {
+	state         protoimpl.MessageState     `protogen:"open.v1"`
+	Contents      []*QuestionSettingResponse `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	Page          int32                      `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int32                      `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	TotalItems    int32                      `protobuf:"varint,4,opt,name=total_items,json=totalItems,proto3" json:"total_items,omitempty"`
+	TotalPages    int32                      `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionSettingResponse) Reset() {
+	*x = ListQuestionSettingResponse{}
+	mi := &file_question_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionSettingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionSettingResponse) ProtoMessage() {}
+
+func (x *ListQuestionSettingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionSettingResponse.ProtoReflect.Descriptor instead.
+func (*ListQuestionSettingResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ListQuestionSettingResponse) GetContents() []*QuestionSettingResponse {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *ListQuestionSettingResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionSettingResponse) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionSettingResponse) GetTotalItems() int32 {
+	if x != nil {
+		return x.TotalItems
+	}
+	return 0
+}
+
+func (x *ListQuestionSettingResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+// Question Answer Key
+type ListQuestionAnswerKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int32                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Search        string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	MerchantId    string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId       string                 `protobuf:"bytes,6,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId      string                 `protobuf:"bytes,7,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionAnswerKeyRequest) Reset() {
+	*x = ListQuestionAnswerKeyRequest{}
+	mi := &file_question_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionAnswerKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionAnswerKeyRequest) ProtoMessage() {}
+
+func (x *ListQuestionAnswerKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionAnswerKeyRequest.ProtoReflect.Descriptor instead.
+func (*ListQuestionAnswerKeyRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerKeyRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+type GetQuestionAnswerKeyByIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionAnswerKeyByIdRequest) Reset() {
+	*x = GetQuestionAnswerKeyByIdRequest{}
+	mi := &file_question_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionAnswerKeyByIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionAnswerKeyByIdRequest) ProtoMessage() {}
+
+func (x *GetQuestionAnswerKeyByIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionAnswerKeyByIdRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionAnswerKeyByIdRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *GetQuestionAnswerKeyByIdRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetQuestionAnswerKeyByUuidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id_           string                 `protobuf:"bytes,1,opt,name=id_,json=id,proto3" json:"id_,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionAnswerKeyByUuidRequest) Reset() {
+	*x = GetQuestionAnswerKeyByUuidRequest{}
+	mi := &file_question_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionAnswerKeyByUuidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionAnswerKeyByUuidRequest) ProtoMessage() {}
+
+func (x *GetQuestionAnswerKeyByUuidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionAnswerKeyByUuidRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionAnswerKeyByUuidRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetQuestionAnswerKeyByUuidRequest) GetId_() string {
+	if x != nil {
+		return x.Id_
+	}
+	return ""
+}
+
+type QuestionAnswerKeyRequest struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId           string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId          string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId  string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	Title             string                 `protobuf:"bytes,7,opt,name=title,proto3" json:"title,omitempty"`
+	Duration          string                 `protobuf:"bytes,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	Options           string                 `protobuf:"bytes,9,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason string                 `protobuf:"bytes,10,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status            string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string                 `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt         *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *QuestionAnswerKeyRequest) Reset() {
+	*x = QuestionAnswerKeyRequest{}
+	mi := &file_question_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionAnswerKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionAnswerKeyRequest) ProtoMessage() {}
+
+func (x *QuestionAnswerKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionAnswerKeyRequest.ProtoReflect.Descriptor instead.
+func (*QuestionAnswerKeyRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *QuestionAnswerKeyRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetDuration() string {
+	if x != nil {
+		return x.Duration
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetOptions() string {
+	if x != nil {
+		return x.Options
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetOptionsWithReason() string {
+	if x != nil {
+		return x.OptionsWithReason
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyRequest) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerKeyRequest) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerKeyRequest) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type QuestionAnswerKeyResponse struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Uuid              string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId        string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId           string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId          string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId  string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	Number            string                 `protobuf:"bytes,7,opt,name=number,proto3" json:"number,omitempty"`
+	Duration          string                 `protobuf:"bytes,8,opt,name=duration,proto3" json:"duration,omitempty"`
+	Options           string                 `protobuf:"bytes,9,opt,name=options,proto3" json:"options,omitempty"`
+	OptionsWithReason string                 `protobuf:"bytes,10,opt,name=options_with_reason,json=optionsWithReason,proto3" json:"options_with_reason,omitempty"`
+	Status            string                 `protobuf:"bytes,11,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,12,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy         string                 `protobuf:"bytes,13,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt         *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *QuestionAnswerKeyResponse) Reset() {
+	*x = QuestionAnswerKeyResponse{}
+	mi := &file_question_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionAnswerKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionAnswerKeyResponse) ProtoMessage() {}
+
+func (x *QuestionAnswerKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionAnswerKeyResponse.ProtoReflect.Descriptor instead.
+func (*QuestionAnswerKeyResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *QuestionAnswerKeyResponse) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetNumber() string {
+	if x != nil {
+		return x.Number
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetDuration() string {
+	if x != nil {
+		return x.Duration
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetOptions() string {
+	if x != nil {
+		return x.Options
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetOptionsWithReason() string {
+	if x != nil {
+		return x.OptionsWithReason
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerKeyResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerKeyResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerKeyResponse) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type ListQuestionAnswerKeyResponse struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Contents      []*QuestionAnswerKeyResponse `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	Page          int32                        `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int32                        `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	TotalItems    int32                        `protobuf:"varint,4,opt,name=total_items,json=totalItems,proto3" json:"total_items,omitempty"`
+	TotalPages    int32                        `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionAnswerKeyResponse) Reset() {
+	*x = ListQuestionAnswerKeyResponse{}
+	mi := &file_question_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionAnswerKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionAnswerKeyResponse) ProtoMessage() {}
+
+func (x *ListQuestionAnswerKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionAnswerKeyResponse.ProtoReflect.Descriptor instead.
+func (*ListQuestionAnswerKeyResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListQuestionAnswerKeyResponse) GetContents() []*QuestionAnswerKeyResponse {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *ListQuestionAnswerKeyResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerKeyResponse) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerKeyResponse) GetTotalItems() int32 {
+	if x != nil {
+		return x.TotalItems
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerKeyResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+// Question Answer User
+type ListQuestionAnswerUserRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Page             int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	Size             int32                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Search           string                 `protobuf:"bytes,3,opt,name=search,proto3" json:"search,omitempty"`
+	Status           string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	MerchantId       string                 `protobuf:"bytes,5,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId          string                 `protobuf:"bytes,6,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId         string                 `protobuf:"bytes,7,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId string                 `protobuf:"bytes,8,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ListQuestionAnswerUserRequest) Reset() {
+	*x = ListQuestionAnswerUserRequest{}
+	mi := &file_question_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionAnswerUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionAnswerUserRequest) ProtoMessage() {}
+
+func (x *ListQuestionAnswerUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionAnswerUserRequest.ProtoReflect.Descriptor instead.
+func (*ListQuestionAnswerUserRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *ListQuestionAnswerUserRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerUserRequest) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerUserRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerUserRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerUserRequest) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerUserRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerUserRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *ListQuestionAnswerUserRequest) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+type GetQuestionAnswerUserByIdRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionAnswerUserByIdRequest) Reset() {
+	*x = GetQuestionAnswerUserByIdRequest{}
+	mi := &file_question_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionAnswerUserByIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionAnswerUserByIdRequest) ProtoMessage() {}
+
+func (x *GetQuestionAnswerUserByIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionAnswerUserByIdRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionAnswerUserByIdRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *GetQuestionAnswerUserByIdRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetQuestionAnswerUserByUuidRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id_           string                 `protobuf:"bytes,1,opt,name=id_,json=id,proto3" json:"id_,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetQuestionAnswerUserByUuidRequest) Reset() {
+	*x = GetQuestionAnswerUserByUuidRequest{}
+	mi := &file_question_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetQuestionAnswerUserByUuidRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetQuestionAnswerUserByUuidRequest) ProtoMessage() {}
+
+func (x *GetQuestionAnswerUserByUuidRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetQuestionAnswerUserByUuidRequest.ProtoReflect.Descriptor instead.
+func (*GetQuestionAnswerUserByUuidRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *GetQuestionAnswerUserByUuidRequest) GetId_() string {
+	if x != nil {
+		return x.Id_
+	}
+	return ""
+}
+
+type QuestionAnswerUserRequest struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Uuid             string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId       string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId          string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId         string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	UserId           string                 `protobuf:"bytes,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type             string                 `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
+	Answer           string                 `protobuf:"bytes,9,opt,name=answer,proto3" json:"answer,omitempty"`
+	AnswerWithReason string                 `protobuf:"bytes,10,opt,name=answer_with_reason,json=answerWithReason,proto3" json:"answer_with_reason,omitempty"`
+	IsAnswered       int32                  `protobuf:"varint,11,opt,name=is_answered,json=isAnswered,proto3" json:"is_answered,omitempty"`
+	Score            int32                  `protobuf:"varint,12,opt,name=score,proto3" json:"score,omitempty"`
+	Status           string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy        string                 `protobuf:"bytes,14,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy        string                 `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt        *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *QuestionAnswerUserRequest) Reset() {
+	*x = QuestionAnswerUserRequest{}
+	mi := &file_question_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionAnswerUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionAnswerUserRequest) ProtoMessage() {}
+
+func (x *QuestionAnswerUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionAnswerUserRequest.ProtoReflect.Descriptor instead.
+func (*QuestionAnswerUserRequest) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *QuestionAnswerUserRequest) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetAnswer() string {
+	if x != nil {
+		return x.Answer
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetAnswerWithReason() string {
+	if x != nil {
+		return x.AnswerWithReason
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetIsAnswered() int32 {
+	if x != nil {
+		return x.IsAnswered
+	}
+	return 0
+}
+
+func (x *QuestionAnswerUserRequest) GetScore() int32 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *QuestionAnswerUserRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserRequest) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerUserRequest) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerUserRequest) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type QuestionAnswerUserResponse struct {
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Uuid             string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	MerchantId       string                 `protobuf:"bytes,3,opt,name=merchant_id,json=merchantId,proto3" json:"merchant_id,omitempty"`
+	ClassId          string                 `protobuf:"bytes,4,opt,name=class_id,json=classId,proto3" json:"class_id,omitempty"`
+	LessonId         string                 `protobuf:"bytes,5,opt,name=lesson_id,json=lessonId,proto3" json:"lesson_id,omitempty"`
+	QuestionMasterId string                 `protobuf:"bytes,6,opt,name=question_master_id,json=questionMasterId,proto3" json:"question_master_id,omitempty"`
+	UserId           string                 `protobuf:"bytes,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Type             string                 `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
+	Answer           string                 `protobuf:"bytes,9,opt,name=answer,proto3" json:"answer,omitempty"`
+	AnswerWithReason string                 `protobuf:"bytes,10,opt,name=answer_with_reason,json=answerWithReason,proto3" json:"answer_with_reason,omitempty"`
+	IsAnswered       int32                  `protobuf:"varint,11,opt,name=is_answered,json=isAnswered,proto3" json:"is_answered,omitempty"`
+	Score            int32                  `protobuf:"varint,12,opt,name=score,proto3" json:"score,omitempty"`
+	Status           string                 `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedBy        string                 `protobuf:"bytes,14,opt,name=created_by,json=createdBy,proto3" json:"created_by,omitempty"`
+	UpdatedBy        string                 `protobuf:"bytes,15,opt,name=updated_by,json=updatedBy,proto3" json:"updated_by,omitempty"`
+	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt        *timestamppb.Timestamp `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	DeletedAt        *timestamppb.Timestamp `protobuf:"bytes,18,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *QuestionAnswerUserResponse) Reset() {
+	*x = QuestionAnswerUserResponse{}
+	mi := &file_question_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionAnswerUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionAnswerUserResponse) ProtoMessage() {}
+
+func (x *QuestionAnswerUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionAnswerUserResponse.ProtoReflect.Descriptor instead.
+func (*QuestionAnswerUserResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *QuestionAnswerUserResponse) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetMerchantId() string {
+	if x != nil {
+		return x.MerchantId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetClassId() string {
+	if x != nil {
+		return x.ClassId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetLessonId() string {
+	if x != nil {
+		return x.LessonId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetQuestionMasterId() string {
+	if x != nil {
+		return x.QuestionMasterId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetAnswer() string {
+	if x != nil {
+		return x.Answer
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetAnswerWithReason() string {
+	if x != nil {
+		return x.AnswerWithReason
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetIsAnswered() int32 {
+	if x != nil {
+		return x.IsAnswered
+	}
+	return 0
+}
+
+func (x *QuestionAnswerUserResponse) GetScore() int32 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *QuestionAnswerUserResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetUpdatedBy() string {
+	if x != nil {
+		return x.UpdatedBy
+	}
+	return ""
+}
+
+func (x *QuestionAnswerUserResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerUserResponse) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *QuestionAnswerUserResponse) GetDeletedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.DeletedAt
+	}
+	return nil
+}
+
+type ListQuestionAnswerUserResponse struct {
+	state         protoimpl.MessageState        `protogen:"open.v1"`
+	Contents      []*QuestionAnswerUserResponse `protobuf:"bytes,1,rep,name=contents,proto3" json:"contents,omitempty"`
+	Page          int32                         `protobuf:"varint,2,opt,name=page,proto3" json:"page,omitempty"`
+	Size          int32                         `protobuf:"varint,3,opt,name=size,proto3" json:"size,omitempty"`
+	TotalItems    int32                         `protobuf:"varint,4,opt,name=total_items,json=totalItems,proto3" json:"total_items,omitempty"`
+	TotalPages    int32                         `protobuf:"varint,5,opt,name=total_pages,json=totalPages,proto3" json:"total_pages,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionAnswerUserResponse) Reset() {
+	*x = ListQuestionAnswerUserResponse{}
+	mi := &file_question_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionAnswerUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionAnswerUserResponse) ProtoMessage() {}
+
+func (x *ListQuestionAnswerUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionAnswerUserResponse.ProtoReflect.Descriptor instead.
+func (*ListQuestionAnswerUserResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *ListQuestionAnswerUserResponse) GetContents() []*QuestionAnswerUserResponse {
+	if x != nil {
+		return x.Contents
+	}
+	return nil
+}
+
+func (x *ListQuestionAnswerUserResponse) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerUserResponse) GetSize() int32 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerUserResponse) GetTotalItems() int32 {
+	if x != nil {
+		return x.TotalItems
+	}
+	return 0
+}
+
+func (x *ListQuestionAnswerUserResponse) GetTotalPages() int32 {
+	if x != nil {
+		return x.TotalPages
+	}
+	return 0
+}
+
+type QuestionNameResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uuid          string                 `protobuf:"bytes,1,opt,name=uuid,proto3" json:"uuid,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *QuestionNameResponse) Reset() {
+	*x = QuestionNameResponse{}
+	mi := &file_question_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *QuestionNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*QuestionNameResponse) ProtoMessage() {}
+
+func (x *QuestionNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use QuestionNameResponse.ProtoReflect.Descriptor instead.
+func (*QuestionNameResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *QuestionNameResponse) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *QuestionNameResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ListQuestionNameResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Data          []*QuestionNameResponse `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListQuestionNameResponse) Reset() {
+	*x = ListQuestionNameResponse{}
+	mi := &file_question_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListQuestionNameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListQuestionNameResponse) ProtoMessage() {}
+
+func (x *ListQuestionNameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_question_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListQuestionNameResponse.ProtoReflect.Descriptor instead.
+func (*ListQuestionNameResponse) Descriptor() ([]byte, []int) {
+	return file_question_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ListQuestionNameResponse) GetData() []*QuestionNameResponse {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 type ActionQuestionResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	IsSuccess     bool                   `protobuf:"varint,1,opt,name=is_success,json=isSuccess,proto3" json:"is_success,omitempty"`
@@ -642,7 +2462,7 @@ type ActionQuestionResponse struct {
 
 func (x *ActionQuestionResponse) Reset() {
 	*x = ActionQuestionResponse{}
-	mi := &file_question_proto_msgTypes[8]
+	mi := &file_question_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +2474,7 @@ func (x *ActionQuestionResponse) String() string {
 func (*ActionQuestionResponse) ProtoMessage() {}
 
 func (x *ActionQuestionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_question_proto_msgTypes[8]
+	mi := &file_question_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +2487,7 @@ func (x *ActionQuestionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionQuestionResponse.ProtoReflect.Descriptor instead.
 func (*ActionQuestionResponse) Descriptor() ([]byte, []int) {
-	return file_question_proto_rawDescGZIP(), []int{8}
+	return file_question_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *ActionQuestionResponse) GetIsSuccess() bool {
@@ -686,7 +2506,7 @@ type GetQuestionPICByUuidRequest struct {
 
 func (x *GetQuestionPICByUuidRequest) Reset() {
 	*x = GetQuestionPICByUuidRequest{}
-	mi := &file_question_proto_msgTypes[9]
+	mi := &file_question_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -698,7 +2518,7 @@ func (x *GetQuestionPICByUuidRequest) String() string {
 func (*GetQuestionPICByUuidRequest) ProtoMessage() {}
 
 func (x *GetQuestionPICByUuidRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_question_proto_msgTypes[9]
+	mi := &file_question_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -711,7 +2531,7 @@ func (x *GetQuestionPICByUuidRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetQuestionPICByUuidRequest.ProtoReflect.Descriptor instead.
 func (*GetQuestionPICByUuidRequest) Descriptor() ([]byte, []int) {
-	return file_question_proto_rawDescGZIP(), []int{9}
+	return file_question_proto_rawDescGZIP(), []int{27}
 }
 
 func (x *GetQuestionPICByUuidRequest) GetId_() string {
@@ -734,65 +2554,283 @@ const file_question_proto_rawDesc = "" +
 	"\x16GetQuestionByIdRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x05R\x02id\"+\n" +
 	"\x18GetQuestionByUuidRequest\x12\x0f\n" +
-	"\x03id_\x18\x01 \x01(\tR\x02id\"\xc7\x03\n" +
+	"\x03id_\x18\x01 \x01(\tR\x02id\"\x9d\x04\n" +
 	"\x0fQuestionRequest\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
 	"\vmerchant_id\x18\x03 \x01(\tR\n" +
-	"merchantId\x12\x1b\n" +
-	"\tlesson_id\x18\x04 \x01(\tR\blessonId\x12\x16\n" +
-	"\x06number\x18\x05 \x01(\tR\x06number\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x18\n" +
-	"\aoptions\x18\a \x01(\tR\aoptions\x12.\n" +
-	"\x13options_with_reason\x18\b \x01(\tR\x11optionsWithReason\x12\x16\n" +
-	"\x06status\x18\t \x01(\tR\x06status\x12\x1d\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12\x16\n" +
+	"\x06number\x18\x06 \x01(\x05R\x06number\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x18\n" +
+	"\aoptions\x18\b \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\t \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\n" +
-	" \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"created_by\x18\v \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\v \x01(\tR\tupdatedBy\x129\n" +
+	"updated_by\x18\f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"\xc8\x03\n" +
+	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xcb\x05\n" +
 	"\x10QuestionResponse\x12\x12\n" +
 	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
 	"\vmerchant_id\x18\x03 \x01(\tR\n" +
-	"merchantId\x12\x1b\n" +
-	"\tlesson_id\x18\x04 \x01(\tR\blessonId\x12\x16\n" +
-	"\x06number\x18\x05 \x01(\tR\x06number\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x12\x18\n" +
-	"\aoptions\x18\a \x01(\tR\aoptions\x12.\n" +
-	"\x13options_with_reason\x18\b \x01(\tR\x11optionsWithReason\x12\x16\n" +
-	"\x06status\x18\t \x01(\tR\x06status\x12\x1d\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12\x16\n" +
+	"\x06number\x18\x06 \x01(\x05R\x06number\x12 \n" +
+	"\vdescription\x18\a \x01(\tR\vdescription\x12\x18\n" +
+	"\aoptions\x18\b \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\t \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\n" +
+	" \x01(\tR\x06status\x12\x1d\n" +
 	"\n" +
-	"created_by\x18\n" +
-	" \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"created_by\x18\v \x01(\tR\tcreatedBy\x12\x1d\n" +
 	"\n" +
-	"updated_by\x18\v \x01(\tR\tupdatedBy\x129\n" +
+	"updated_by\x18\f \x01(\tR\tupdatedBy\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\">\n" +
-	"\x14QuestionNameResponse\x12\x12\n" +
-	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\"Q\n" +
-	"\x18ListQuestionNameResponse\x125\n" +
-	"\x04data\x18\x01 \x03(\v2!.question.v2.QuestionNameResponseR\x04data\"\xb3\x01\n" +
-	"\x14ListQuestionResponse\x121\n" +
-	"\x04data\x18\x01 \x03(\v2\x1d.question.v2.QuestionResponseR\x04data\x12\x12\n" +
+	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\x12X\n" +
+	"\x14question_answer_keys\x18\x10 \x03(\v2&.question.v2.QuestionAnswerKeyResponseR\x12questionAnswerKeys\x12Q\n" +
+	"\x11question_settings\x18\x11 \x03(\v2$.question.v2.QuestionSettingResponseR\x10questionSettings\"\xbb\x01\n" +
+	"\x14ListQuestionResponse\x129\n" +
+	"\bcontents\x18\x01 \x03(\v2\x1d.question.v2.QuestionResponseR\bcontents\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x12\n" +
 	"\x04size\x18\x03 \x01(\x05R\x04size\x12\x1f\n" +
 	"\vtotal_items\x18\x04 \x01(\x05R\n" +
 	"totalItems\x12\x1f\n" +
 	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
-	"totalPages\"7\n" +
+	"totalPages\"t\n" +
+	"\x1aListQuestionSettingRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x05R\x04size\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"/\n" +
+	"\x1dGetQuestionSettingByIdRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"2\n" +
+	"\x1fGetQuestionSettingByUuidRequest\x12\x0f\n" +
+	"\x03id_\x18\x01 \x01(\tR\x02id\"\xca\x04\n" +
+	"\x16QuestionSettingRequest\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x14\n" +
+	"\x05title\x18\a \x01(\tR\x05title\x12\x1a\n" +
+	"\bduration\x18\b \x01(\tR\bduration\x12\x18\n" +
+	"\aoptions\x18\t \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\n" +
+	" \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\r \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xcd\x04\n" +
+	"\x17QuestionSettingResponse\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x16\n" +
+	"\x06number\x18\a \x01(\tR\x06number\x12\x1a\n" +
+	"\bduration\x18\b \x01(\tR\bduration\x12\x18\n" +
+	"\aoptions\x18\t \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\n" +
+	" \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\r \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xc9\x01\n" +
+	"\x1bListQuestionSettingResponse\x12@\n" +
+	"\bcontents\x18\x01 \x03(\v2$.question.v2.QuestionSettingResponseR\bcontents\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x05R\x04size\x12\x1f\n" +
+	"\vtotal_items\x18\x04 \x01(\x05R\n" +
+	"totalItems\x12\x1f\n" +
+	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
+	"totalPages\"\xcf\x01\n" +
+	"\x1cListQuestionAnswerKeyRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x05R\x04size\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1f\n" +
+	"\vmerchant_id\x18\x05 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x06 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\a \x01(\tR\blessonId\"1\n" +
+	"\x1fGetQuestionAnswerKeyByIdRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"4\n" +
+	"!GetQuestionAnswerKeyByUuidRequest\x12\x0f\n" +
+	"\x03id_\x18\x01 \x01(\tR\x02id\"\xcc\x04\n" +
+	"\x18QuestionAnswerKeyRequest\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x14\n" +
+	"\x05title\x18\a \x01(\tR\x05title\x12\x1a\n" +
+	"\bduration\x18\b \x01(\tR\bduration\x12\x18\n" +
+	"\aoptions\x18\t \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\n" +
+	" \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\r \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xcf\x04\n" +
+	"\x19QuestionAnswerKeyResponse\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x16\n" +
+	"\x06number\x18\a \x01(\tR\x06number\x12\x1a\n" +
+	"\bduration\x18\b \x01(\tR\bduration\x12\x18\n" +
+	"\aoptions\x18\t \x01(\tR\aoptions\x12.\n" +
+	"\x13options_with_reason\x18\n" +
+	" \x01(\tR\x11optionsWithReason\x12\x16\n" +
+	"\x06status\x18\v \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\f \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\r \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xcd\x01\n" +
+	"\x1dListQuestionAnswerKeyResponse\x12B\n" +
+	"\bcontents\x18\x01 \x03(\v2&.question.v2.QuestionAnswerKeyResponseR\bcontents\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x05R\x04size\x12\x1f\n" +
+	"\vtotal_items\x18\x04 \x01(\x05R\n" +
+	"totalItems\x12\x1f\n" +
+	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
+	"totalPages\"\xfe\x01\n" +
+	"\x1dListQuestionAnswerUserRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x02 \x01(\x05R\x04size\x12\x16\n" +
+	"\x06search\x18\x03 \x01(\tR\x06search\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1f\n" +
+	"\vmerchant_id\x18\x05 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x06 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\a \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\b \x01(\tR\x10questionMasterId\"2\n" +
+	" GetQuestionAnswerUserByIdRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\"5\n" +
+	"\"GetQuestionAnswerUserByUuidRequest\x12\x0f\n" +
+	"\x03id_\x18\x01 \x01(\tR\x02id\"\xfb\x04\n" +
+	"\x19QuestionAnswerUserRequest\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x17\n" +
+	"\auser_id\x18\a \x01(\tR\x06userId\x12\x12\n" +
+	"\x04type\x18\b \x01(\tR\x04type\x12\x16\n" +
+	"\x06answer\x18\t \x01(\tR\x06answer\x12,\n" +
+	"\x12answer_with_reason\x18\n" +
+	" \x01(\tR\x10answerWithReason\x12\x1f\n" +
+	"\vis_answered\x18\v \x01(\x05R\n" +
+	"isAnswered\x12\x14\n" +
+	"\x05score\x18\f \x01(\x05R\x05score\x12\x16\n" +
+	"\x06status\x18\r \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\x0e \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xfc\x04\n" +
+	"\x1aQuestionAnswerUserResponse\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1f\n" +
+	"\vmerchant_id\x18\x03 \x01(\tR\n" +
+	"merchantId\x12\x19\n" +
+	"\bclass_id\x18\x04 \x01(\tR\aclassId\x12\x1b\n" +
+	"\tlesson_id\x18\x05 \x01(\tR\blessonId\x12,\n" +
+	"\x12question_master_id\x18\x06 \x01(\tR\x10questionMasterId\x12\x17\n" +
+	"\auser_id\x18\a \x01(\tR\x06userId\x12\x12\n" +
+	"\x04type\x18\b \x01(\tR\x04type\x12\x16\n" +
+	"\x06answer\x18\t \x01(\tR\x06answer\x12,\n" +
+	"\x12answer_with_reason\x18\n" +
+	" \x01(\tR\x10answerWithReason\x12\x1f\n" +
+	"\vis_answered\x18\v \x01(\x05R\n" +
+	"isAnswered\x12\x14\n" +
+	"\x05score\x18\f \x01(\x05R\x05score\x12\x16\n" +
+	"\x06status\x18\r \x01(\tR\x06status\x12\x1d\n" +
+	"\n" +
+	"created_by\x18\x0e \x01(\tR\tcreatedBy\x12\x1d\n" +
+	"\n" +
+	"updated_by\x18\x0f \x01(\tR\tupdatedBy\x129\n" +
+	"\n" +
+	"created_at\x18\x10 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x11 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x129\n" +
+	"\n" +
+	"deleted_at\x18\x12 \x01(\v2\x1a.google.protobuf.TimestampR\tdeletedAt\"\xcf\x01\n" +
+	"\x1eListQuestionAnswerUserResponse\x12C\n" +
+	"\bcontents\x18\x01 \x03(\v2'.question.v2.QuestionAnswerUserResponseR\bcontents\x12\x12\n" +
+	"\x04page\x18\x02 \x01(\x05R\x04page\x12\x12\n" +
+	"\x04size\x18\x03 \x01(\x05R\x04size\x12\x1f\n" +
+	"\vtotal_items\x18\x04 \x01(\x05R\n" +
+	"totalItems\x12\x1f\n" +
+	"\vtotal_pages\x18\x05 \x01(\x05R\n" +
+	"totalPages\">\n" +
+	"\x14QuestionNameResponse\x12\x12\n" +
+	"\x04uuid\x18\x01 \x01(\tR\x04uuid\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"Q\n" +
+	"\x18ListQuestionNameResponse\x125\n" +
+	"\x04data\x18\x01 \x03(\v2!.question.v2.QuestionNameResponseR\x04data\"7\n" +
 	"\x16ActionQuestionResponse\x12\x1d\n" +
 	"\n" +
 	"is_success\x18\x01 \x01(\bR\tisSuccess\".\n" +
 	"\x1bGetQuestionPICByUuidRequest\x12\x0f\n" +
-	"\x03id_\x18\x01 \x01(\tR\x02id2\xd1\x04\n" +
+	"\x03id_\x18\x01 \x01(\tR\x02id2\xce\x10\n" +
 	"\x0fQuestionService\x12M\n" +
 	"\x06GetAll\x12 .question.v2.ListQuestionRequest\x1a!.question.v2.ListQuestionResponse\x12]\n" +
 	"\x12GetAllQuestionName\x12 .question.v2.ListQuestionRequest\x1a%.question.v2.ListQuestionNameResponse\x12K\n" +
@@ -800,7 +2838,22 @@ const file_question_proto_rawDesc = "" +
 	"\x06Update\x12\x1c.question.v2.QuestionRequest\x1a#.question.v2.ActionQuestionResponse\x12M\n" +
 	"\aGetById\x12#.question.v2.GetQuestionByIdRequest\x1a\x1d.question.v2.QuestionResponse\x12Q\n" +
 	"\tGetByUuid\x12%.question.v2.GetQuestionByUuidRequest\x1a\x1d.question.v2.QuestionResponse\x12T\n" +
-	"\x06Delete\x12%.question.v2.GetQuestionByUuidRequest\x1a#.question.v2.ActionQuestionResponseBGZEgithub.com/ImamTry257/lms-proto-question/gen/go/question;questionpbv2b\x06proto3"
+	"\x06Delete\x12%.question.v2.GetQuestionByUuidRequest\x1a#.question.v2.ActionQuestionResponse\x12b\n" +
+	"\rGetAllSetting\x12'.question.v2.ListQuestionSettingRequest\x1a(.question.v2.ListQuestionSettingResponse\x12Y\n" +
+	"\rCreateSetting\x12#.question.v2.QuestionSettingRequest\x1a#.question.v2.ActionQuestionResponse\x12Y\n" +
+	"\rUpdateSetting\x12#.question.v2.QuestionSettingRequest\x1a#.question.v2.ActionQuestionResponse\x12b\n" +
+	"\x0eGetSettingById\x12*.question.v2.GetQuestionSettingByIdRequest\x1a$.question.v2.QuestionSettingResponse\x12f\n" +
+	"\x10GetSettingByUuid\x12,.question.v2.GetQuestionSettingByUuidRequest\x1a$.question.v2.QuestionSettingResponse\x12b\n" +
+	"\rDeleteSetting\x12,.question.v2.GetQuestionSettingByUuidRequest\x1a#.question.v2.ActionQuestionResponse\x12h\n" +
+	"\x0fGetAllAnswerKey\x12).question.v2.ListQuestionAnswerKeyRequest\x1a*.question.v2.ListQuestionAnswerKeyResponse\x12]\n" +
+	"\x0fCreateAnswerKey\x12%.question.v2.QuestionAnswerKeyRequest\x1a#.question.v2.ActionQuestionResponse\x12]\n" +
+	"\x0fUpdateAnswerKey\x12%.question.v2.QuestionAnswerKeyRequest\x1a#.question.v2.ActionQuestionResponse\x12h\n" +
+	"\x10GetAnswerKeyById\x12,.question.v2.GetQuestionAnswerKeyByIdRequest\x1a&.question.v2.QuestionAnswerKeyResponse\x12l\n" +
+	"\x12GetAnswerKeyByUuid\x12..question.v2.GetQuestionAnswerKeyByUuidRequest\x1a&.question.v2.QuestionAnswerKeyResponse\x12f\n" +
+	"\x0fDeleteAnswerKey\x12..question.v2.GetQuestionAnswerKeyByUuidRequest\x1a#.question.v2.ActionQuestionResponse\x12k\n" +
+	"\x10GetAllAnswerUser\x12*.question.v2.ListQuestionAnswerUserRequest\x1a+.question.v2.ListQuestionAnswerUserResponse\x12k\n" +
+	"\x11GetAnswerUserById\x12-.question.v2.GetQuestionAnswerUserByIdRequest\x1a'.question.v2.QuestionAnswerUserResponse\x12o\n" +
+	"\x13GetAnswerUserByUuid\x12/.question.v2.GetQuestionAnswerUserByUuidRequest\x1a'.question.v2.QuestionAnswerUserResponseBGZEgithub.com/ImamTry257/lms-proto-question/gen/go/question;questionpbv2b\x06proto3"
 
 var (
 	file_question_proto_rawDescOnce sync.Once
@@ -814,46 +2867,119 @@ func file_question_proto_rawDescGZIP() []byte {
 	return file_question_proto_rawDescData
 }
 
-var file_question_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_question_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_question_proto_goTypes = []any{
-	(*ListQuestionRequest)(nil),         // 0: question.v2.ListQuestionRequest
-	(*GetQuestionByIdRequest)(nil),      // 1: question.v2.GetQuestionByIdRequest
-	(*GetQuestionByUuidRequest)(nil),    // 2: question.v2.GetQuestionByUuidRequest
-	(*QuestionRequest)(nil),             // 3: question.v2.QuestionRequest
-	(*QuestionResponse)(nil),            // 4: question.v2.QuestionResponse
-	(*QuestionNameResponse)(nil),        // 5: question.v2.QuestionNameResponse
-	(*ListQuestionNameResponse)(nil),    // 6: question.v2.ListQuestionNameResponse
-	(*ListQuestionResponse)(nil),        // 7: question.v2.ListQuestionResponse
-	(*ActionQuestionResponse)(nil),      // 8: question.v2.ActionQuestionResponse
-	(*GetQuestionPICByUuidRequest)(nil), // 9: question.v2.GetQuestionPICByUuidRequest
-	(*timestamppb.Timestamp)(nil),       // 10: google.protobuf.Timestamp
+	(*ListQuestionRequest)(nil),                // 0: question.v2.ListQuestionRequest
+	(*GetQuestionByIdRequest)(nil),             // 1: question.v2.GetQuestionByIdRequest
+	(*GetQuestionByUuidRequest)(nil),           // 2: question.v2.GetQuestionByUuidRequest
+	(*QuestionRequest)(nil),                    // 3: question.v2.QuestionRequest
+	(*QuestionResponse)(nil),                   // 4: question.v2.QuestionResponse
+	(*ListQuestionResponse)(nil),               // 5: question.v2.ListQuestionResponse
+	(*ListQuestionSettingRequest)(nil),         // 6: question.v2.ListQuestionSettingRequest
+	(*GetQuestionSettingByIdRequest)(nil),      // 7: question.v2.GetQuestionSettingByIdRequest
+	(*GetQuestionSettingByUuidRequest)(nil),    // 8: question.v2.GetQuestionSettingByUuidRequest
+	(*QuestionSettingRequest)(nil),             // 9: question.v2.QuestionSettingRequest
+	(*QuestionSettingResponse)(nil),            // 10: question.v2.QuestionSettingResponse
+	(*ListQuestionSettingResponse)(nil),        // 11: question.v2.ListQuestionSettingResponse
+	(*ListQuestionAnswerKeyRequest)(nil),       // 12: question.v2.ListQuestionAnswerKeyRequest
+	(*GetQuestionAnswerKeyByIdRequest)(nil),    // 13: question.v2.GetQuestionAnswerKeyByIdRequest
+	(*GetQuestionAnswerKeyByUuidRequest)(nil),  // 14: question.v2.GetQuestionAnswerKeyByUuidRequest
+	(*QuestionAnswerKeyRequest)(nil),           // 15: question.v2.QuestionAnswerKeyRequest
+	(*QuestionAnswerKeyResponse)(nil),          // 16: question.v2.QuestionAnswerKeyResponse
+	(*ListQuestionAnswerKeyResponse)(nil),      // 17: question.v2.ListQuestionAnswerKeyResponse
+	(*ListQuestionAnswerUserRequest)(nil),      // 18: question.v2.ListQuestionAnswerUserRequest
+	(*GetQuestionAnswerUserByIdRequest)(nil),   // 19: question.v2.GetQuestionAnswerUserByIdRequest
+	(*GetQuestionAnswerUserByUuidRequest)(nil), // 20: question.v2.GetQuestionAnswerUserByUuidRequest
+	(*QuestionAnswerUserRequest)(nil),          // 21: question.v2.QuestionAnswerUserRequest
+	(*QuestionAnswerUserResponse)(nil),         // 22: question.v2.QuestionAnswerUserResponse
+	(*ListQuestionAnswerUserResponse)(nil),     // 23: question.v2.ListQuestionAnswerUserResponse
+	(*QuestionNameResponse)(nil),               // 24: question.v2.QuestionNameResponse
+	(*ListQuestionNameResponse)(nil),           // 25: question.v2.ListQuestionNameResponse
+	(*ActionQuestionResponse)(nil),             // 26: question.v2.ActionQuestionResponse
+	(*GetQuestionPICByUuidRequest)(nil),        // 27: question.v2.GetQuestionPICByUuidRequest
+	(*timestamppb.Timestamp)(nil),              // 28: google.protobuf.Timestamp
 }
 var file_question_proto_depIdxs = []int32{
-	10, // 0: question.v2.QuestionRequest.created_at:type_name -> google.protobuf.Timestamp
-	10, // 1: question.v2.QuestionRequest.updated_at:type_name -> google.protobuf.Timestamp
-	10, // 2: question.v2.QuestionResponse.created_at:type_name -> google.protobuf.Timestamp
-	10, // 3: question.v2.QuestionResponse.updated_at:type_name -> google.protobuf.Timestamp
-	5,  // 4: question.v2.ListQuestionNameResponse.data:type_name -> question.v2.QuestionNameResponse
-	4,  // 5: question.v2.ListQuestionResponse.data:type_name -> question.v2.QuestionResponse
-	0,  // 6: question.v2.QuestionService.GetAll:input_type -> question.v2.ListQuestionRequest
-	0,  // 7: question.v2.QuestionService.GetAllQuestionName:input_type -> question.v2.ListQuestionRequest
-	3,  // 8: question.v2.QuestionService.Create:input_type -> question.v2.QuestionRequest
-	3,  // 9: question.v2.QuestionService.Update:input_type -> question.v2.QuestionRequest
-	1,  // 10: question.v2.QuestionService.GetById:input_type -> question.v2.GetQuestionByIdRequest
-	2,  // 11: question.v2.QuestionService.GetByUuid:input_type -> question.v2.GetQuestionByUuidRequest
-	2,  // 12: question.v2.QuestionService.Delete:input_type -> question.v2.GetQuestionByUuidRequest
-	7,  // 13: question.v2.QuestionService.GetAll:output_type -> question.v2.ListQuestionResponse
-	6,  // 14: question.v2.QuestionService.GetAllQuestionName:output_type -> question.v2.ListQuestionNameResponse
-	8,  // 15: question.v2.QuestionService.Create:output_type -> question.v2.ActionQuestionResponse
-	8,  // 16: question.v2.QuestionService.Update:output_type -> question.v2.ActionQuestionResponse
-	4,  // 17: question.v2.QuestionService.GetById:output_type -> question.v2.QuestionResponse
-	4,  // 18: question.v2.QuestionService.GetByUuid:output_type -> question.v2.QuestionResponse
-	8,  // 19: question.v2.QuestionService.Delete:output_type -> question.v2.ActionQuestionResponse
-	13, // [13:20] is the sub-list for method output_type
-	6,  // [6:13] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	28, // 0: question.v2.QuestionRequest.created_at:type_name -> google.protobuf.Timestamp
+	28, // 1: question.v2.QuestionRequest.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 2: question.v2.QuestionRequest.deleted_at:type_name -> google.protobuf.Timestamp
+	28, // 3: question.v2.QuestionResponse.created_at:type_name -> google.protobuf.Timestamp
+	28, // 4: question.v2.QuestionResponse.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 5: question.v2.QuestionResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	16, // 6: question.v2.QuestionResponse.question_answer_keys:type_name -> question.v2.QuestionAnswerKeyResponse
+	10, // 7: question.v2.QuestionResponse.question_settings:type_name -> question.v2.QuestionSettingResponse
+	4,  // 8: question.v2.ListQuestionResponse.contents:type_name -> question.v2.QuestionResponse
+	28, // 9: question.v2.QuestionSettingRequest.created_at:type_name -> google.protobuf.Timestamp
+	28, // 10: question.v2.QuestionSettingRequest.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 11: question.v2.QuestionSettingRequest.deleted_at:type_name -> google.protobuf.Timestamp
+	28, // 12: question.v2.QuestionSettingResponse.created_at:type_name -> google.protobuf.Timestamp
+	28, // 13: question.v2.QuestionSettingResponse.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 14: question.v2.QuestionSettingResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	10, // 15: question.v2.ListQuestionSettingResponse.contents:type_name -> question.v2.QuestionSettingResponse
+	28, // 16: question.v2.QuestionAnswerKeyRequest.created_at:type_name -> google.protobuf.Timestamp
+	28, // 17: question.v2.QuestionAnswerKeyRequest.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 18: question.v2.QuestionAnswerKeyRequest.deleted_at:type_name -> google.protobuf.Timestamp
+	28, // 19: question.v2.QuestionAnswerKeyResponse.created_at:type_name -> google.protobuf.Timestamp
+	28, // 20: question.v2.QuestionAnswerKeyResponse.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 21: question.v2.QuestionAnswerKeyResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	16, // 22: question.v2.ListQuestionAnswerKeyResponse.contents:type_name -> question.v2.QuestionAnswerKeyResponse
+	28, // 23: question.v2.QuestionAnswerUserRequest.created_at:type_name -> google.protobuf.Timestamp
+	28, // 24: question.v2.QuestionAnswerUserRequest.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 25: question.v2.QuestionAnswerUserRequest.deleted_at:type_name -> google.protobuf.Timestamp
+	28, // 26: question.v2.QuestionAnswerUserResponse.created_at:type_name -> google.protobuf.Timestamp
+	28, // 27: question.v2.QuestionAnswerUserResponse.updated_at:type_name -> google.protobuf.Timestamp
+	28, // 28: question.v2.QuestionAnswerUserResponse.deleted_at:type_name -> google.protobuf.Timestamp
+	22, // 29: question.v2.ListQuestionAnswerUserResponse.contents:type_name -> question.v2.QuestionAnswerUserResponse
+	24, // 30: question.v2.ListQuestionNameResponse.data:type_name -> question.v2.QuestionNameResponse
+	0,  // 31: question.v2.QuestionService.GetAll:input_type -> question.v2.ListQuestionRequest
+	0,  // 32: question.v2.QuestionService.GetAllQuestionName:input_type -> question.v2.ListQuestionRequest
+	3,  // 33: question.v2.QuestionService.Create:input_type -> question.v2.QuestionRequest
+	3,  // 34: question.v2.QuestionService.Update:input_type -> question.v2.QuestionRequest
+	1,  // 35: question.v2.QuestionService.GetById:input_type -> question.v2.GetQuestionByIdRequest
+	2,  // 36: question.v2.QuestionService.GetByUuid:input_type -> question.v2.GetQuestionByUuidRequest
+	2,  // 37: question.v2.QuestionService.Delete:input_type -> question.v2.GetQuestionByUuidRequest
+	6,  // 38: question.v2.QuestionService.GetAllSetting:input_type -> question.v2.ListQuestionSettingRequest
+	9,  // 39: question.v2.QuestionService.CreateSetting:input_type -> question.v2.QuestionSettingRequest
+	9,  // 40: question.v2.QuestionService.UpdateSetting:input_type -> question.v2.QuestionSettingRequest
+	7,  // 41: question.v2.QuestionService.GetSettingById:input_type -> question.v2.GetQuestionSettingByIdRequest
+	8,  // 42: question.v2.QuestionService.GetSettingByUuid:input_type -> question.v2.GetQuestionSettingByUuidRequest
+	8,  // 43: question.v2.QuestionService.DeleteSetting:input_type -> question.v2.GetQuestionSettingByUuidRequest
+	12, // 44: question.v2.QuestionService.GetAllAnswerKey:input_type -> question.v2.ListQuestionAnswerKeyRequest
+	15, // 45: question.v2.QuestionService.CreateAnswerKey:input_type -> question.v2.QuestionAnswerKeyRequest
+	15, // 46: question.v2.QuestionService.UpdateAnswerKey:input_type -> question.v2.QuestionAnswerKeyRequest
+	13, // 47: question.v2.QuestionService.GetAnswerKeyById:input_type -> question.v2.GetQuestionAnswerKeyByIdRequest
+	14, // 48: question.v2.QuestionService.GetAnswerKeyByUuid:input_type -> question.v2.GetQuestionAnswerKeyByUuidRequest
+	14, // 49: question.v2.QuestionService.DeleteAnswerKey:input_type -> question.v2.GetQuestionAnswerKeyByUuidRequest
+	18, // 50: question.v2.QuestionService.GetAllAnswerUser:input_type -> question.v2.ListQuestionAnswerUserRequest
+	19, // 51: question.v2.QuestionService.GetAnswerUserById:input_type -> question.v2.GetQuestionAnswerUserByIdRequest
+	20, // 52: question.v2.QuestionService.GetAnswerUserByUuid:input_type -> question.v2.GetQuestionAnswerUserByUuidRequest
+	5,  // 53: question.v2.QuestionService.GetAll:output_type -> question.v2.ListQuestionResponse
+	25, // 54: question.v2.QuestionService.GetAllQuestionName:output_type -> question.v2.ListQuestionNameResponse
+	26, // 55: question.v2.QuestionService.Create:output_type -> question.v2.ActionQuestionResponse
+	26, // 56: question.v2.QuestionService.Update:output_type -> question.v2.ActionQuestionResponse
+	4,  // 57: question.v2.QuestionService.GetById:output_type -> question.v2.QuestionResponse
+	4,  // 58: question.v2.QuestionService.GetByUuid:output_type -> question.v2.QuestionResponse
+	26, // 59: question.v2.QuestionService.Delete:output_type -> question.v2.ActionQuestionResponse
+	11, // 60: question.v2.QuestionService.GetAllSetting:output_type -> question.v2.ListQuestionSettingResponse
+	26, // 61: question.v2.QuestionService.CreateSetting:output_type -> question.v2.ActionQuestionResponse
+	26, // 62: question.v2.QuestionService.UpdateSetting:output_type -> question.v2.ActionQuestionResponse
+	10, // 63: question.v2.QuestionService.GetSettingById:output_type -> question.v2.QuestionSettingResponse
+	10, // 64: question.v2.QuestionService.GetSettingByUuid:output_type -> question.v2.QuestionSettingResponse
+	26, // 65: question.v2.QuestionService.DeleteSetting:output_type -> question.v2.ActionQuestionResponse
+	17, // 66: question.v2.QuestionService.GetAllAnswerKey:output_type -> question.v2.ListQuestionAnswerKeyResponse
+	26, // 67: question.v2.QuestionService.CreateAnswerKey:output_type -> question.v2.ActionQuestionResponse
+	26, // 68: question.v2.QuestionService.UpdateAnswerKey:output_type -> question.v2.ActionQuestionResponse
+	16, // 69: question.v2.QuestionService.GetAnswerKeyById:output_type -> question.v2.QuestionAnswerKeyResponse
+	16, // 70: question.v2.QuestionService.GetAnswerKeyByUuid:output_type -> question.v2.QuestionAnswerKeyResponse
+	26, // 71: question.v2.QuestionService.DeleteAnswerKey:output_type -> question.v2.ActionQuestionResponse
+	23, // 72: question.v2.QuestionService.GetAllAnswerUser:output_type -> question.v2.ListQuestionAnswerUserResponse
+	22, // 73: question.v2.QuestionService.GetAnswerUserById:output_type -> question.v2.QuestionAnswerUserResponse
+	22, // 74: question.v2.QuestionService.GetAnswerUserByUuid:output_type -> question.v2.QuestionAnswerUserResponse
+	53, // [53:75] is the sub-list for method output_type
+	31, // [31:53] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_question_proto_init() }
@@ -867,7 +2993,7 @@ func file_question_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_question_proto_rawDesc), len(file_question_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -22,13 +22,28 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	QuestionService_GetAll_FullMethodName             = "/question.v2.QuestionService/GetAll"
-	QuestionService_GetAllQuestionName_FullMethodName = "/question.v2.QuestionService/GetAllQuestionName"
-	QuestionService_Create_FullMethodName             = "/question.v2.QuestionService/Create"
-	QuestionService_Update_FullMethodName             = "/question.v2.QuestionService/Update"
-	QuestionService_GetById_FullMethodName            = "/question.v2.QuestionService/GetById"
-	QuestionService_GetByUuid_FullMethodName          = "/question.v2.QuestionService/GetByUuid"
-	QuestionService_Delete_FullMethodName             = "/question.v2.QuestionService/Delete"
+	QuestionService_GetAll_FullMethodName              = "/question.v2.QuestionService/GetAll"
+	QuestionService_GetAllQuestionName_FullMethodName  = "/question.v2.QuestionService/GetAllQuestionName"
+	QuestionService_Create_FullMethodName              = "/question.v2.QuestionService/Create"
+	QuestionService_Update_FullMethodName              = "/question.v2.QuestionService/Update"
+	QuestionService_GetById_FullMethodName             = "/question.v2.QuestionService/GetById"
+	QuestionService_GetByUuid_FullMethodName           = "/question.v2.QuestionService/GetByUuid"
+	QuestionService_Delete_FullMethodName              = "/question.v2.QuestionService/Delete"
+	QuestionService_GetAllSetting_FullMethodName       = "/question.v2.QuestionService/GetAllSetting"
+	QuestionService_CreateSetting_FullMethodName       = "/question.v2.QuestionService/CreateSetting"
+	QuestionService_UpdateSetting_FullMethodName       = "/question.v2.QuestionService/UpdateSetting"
+	QuestionService_GetSettingById_FullMethodName      = "/question.v2.QuestionService/GetSettingById"
+	QuestionService_GetSettingByUuid_FullMethodName    = "/question.v2.QuestionService/GetSettingByUuid"
+	QuestionService_DeleteSetting_FullMethodName       = "/question.v2.QuestionService/DeleteSetting"
+	QuestionService_GetAllAnswerKey_FullMethodName     = "/question.v2.QuestionService/GetAllAnswerKey"
+	QuestionService_CreateAnswerKey_FullMethodName     = "/question.v2.QuestionService/CreateAnswerKey"
+	QuestionService_UpdateAnswerKey_FullMethodName     = "/question.v2.QuestionService/UpdateAnswerKey"
+	QuestionService_GetAnswerKeyById_FullMethodName    = "/question.v2.QuestionService/GetAnswerKeyById"
+	QuestionService_GetAnswerKeyByUuid_FullMethodName  = "/question.v2.QuestionService/GetAnswerKeyByUuid"
+	QuestionService_DeleteAnswerKey_FullMethodName     = "/question.v2.QuestionService/DeleteAnswerKey"
+	QuestionService_GetAllAnswerUser_FullMethodName    = "/question.v2.QuestionService/GetAllAnswerUser"
+	QuestionService_GetAnswerUserById_FullMethodName   = "/question.v2.QuestionService/GetAnswerUserById"
+	QuestionService_GetAnswerUserByUuid_FullMethodName = "/question.v2.QuestionService/GetAnswerUserByUuid"
 )
 
 // QuestionServiceClient is the client API for QuestionService service.
@@ -43,6 +58,24 @@ type QuestionServiceClient interface {
 	GetById(ctx context.Context, in *GetQuestionByIdRequest, opts ...grpc.CallOption) (*QuestionResponse, error)
 	GetByUuid(ctx context.Context, in *GetQuestionByUuidRequest, opts ...grpc.CallOption) (*QuestionResponse, error)
 	Delete(ctx context.Context, in *GetQuestionByUuidRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	// Question Setting
+	GetAllSetting(ctx context.Context, in *ListQuestionSettingRequest, opts ...grpc.CallOption) (*ListQuestionSettingResponse, error)
+	CreateSetting(ctx context.Context, in *QuestionSettingRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	UpdateSetting(ctx context.Context, in *QuestionSettingRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	GetSettingById(ctx context.Context, in *GetQuestionSettingByIdRequest, opts ...grpc.CallOption) (*QuestionSettingResponse, error)
+	GetSettingByUuid(ctx context.Context, in *GetQuestionSettingByUuidRequest, opts ...grpc.CallOption) (*QuestionSettingResponse, error)
+	DeleteSetting(ctx context.Context, in *GetQuestionSettingByUuidRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	// Question Answer Key
+	GetAllAnswerKey(ctx context.Context, in *ListQuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ListQuestionAnswerKeyResponse, error)
+	CreateAnswerKey(ctx context.Context, in *QuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	UpdateAnswerKey(ctx context.Context, in *QuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	GetAnswerKeyById(ctx context.Context, in *GetQuestionAnswerKeyByIdRequest, opts ...grpc.CallOption) (*QuestionAnswerKeyResponse, error)
+	GetAnswerKeyByUuid(ctx context.Context, in *GetQuestionAnswerKeyByUuidRequest, opts ...grpc.CallOption) (*QuestionAnswerKeyResponse, error)
+	DeleteAnswerKey(ctx context.Context, in *GetQuestionAnswerKeyByUuidRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error)
+	// Question Answer User
+	GetAllAnswerUser(ctx context.Context, in *ListQuestionAnswerUserRequest, opts ...grpc.CallOption) (*ListQuestionAnswerUserResponse, error)
+	GetAnswerUserById(ctx context.Context, in *GetQuestionAnswerUserByIdRequest, opts ...grpc.CallOption) (*QuestionAnswerUserResponse, error)
+	GetAnswerUserByUuid(ctx context.Context, in *GetQuestionAnswerUserByUuidRequest, opts ...grpc.CallOption) (*QuestionAnswerUserResponse, error)
 }
 
 type questionServiceClient struct {
@@ -123,6 +156,156 @@ func (c *questionServiceClient) Delete(ctx context.Context, in *GetQuestionByUui
 	return out, nil
 }
 
+func (c *questionServiceClient) GetAllSetting(ctx context.Context, in *ListQuestionSettingRequest, opts ...grpc.CallOption) (*ListQuestionSettingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListQuestionSettingResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAllSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) CreateSetting(ctx context.Context, in *QuestionSettingRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_CreateSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) UpdateSetting(ctx context.Context, in *QuestionSettingRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_UpdateSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetSettingById(ctx context.Context, in *GetQuestionSettingByIdRequest, opts ...grpc.CallOption) (*QuestionSettingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionSettingResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetSettingById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetSettingByUuid(ctx context.Context, in *GetQuestionSettingByUuidRequest, opts ...grpc.CallOption) (*QuestionSettingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionSettingResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetSettingByUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) DeleteSetting(ctx context.Context, in *GetQuestionSettingByUuidRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_DeleteSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAllAnswerKey(ctx context.Context, in *ListQuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ListQuestionAnswerKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListQuestionAnswerKeyResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAllAnswerKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) CreateAnswerKey(ctx context.Context, in *QuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_CreateAnswerKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) UpdateAnswerKey(ctx context.Context, in *QuestionAnswerKeyRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_UpdateAnswerKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAnswerKeyById(ctx context.Context, in *GetQuestionAnswerKeyByIdRequest, opts ...grpc.CallOption) (*QuestionAnswerKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionAnswerKeyResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAnswerKeyById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAnswerKeyByUuid(ctx context.Context, in *GetQuestionAnswerKeyByUuidRequest, opts ...grpc.CallOption) (*QuestionAnswerKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionAnswerKeyResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAnswerKeyByUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) DeleteAnswerKey(ctx context.Context, in *GetQuestionAnswerKeyByUuidRequest, opts ...grpc.CallOption) (*ActionQuestionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActionQuestionResponse)
+	err := c.cc.Invoke(ctx, QuestionService_DeleteAnswerKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAllAnswerUser(ctx context.Context, in *ListQuestionAnswerUserRequest, opts ...grpc.CallOption) (*ListQuestionAnswerUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListQuestionAnswerUserResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAllAnswerUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAnswerUserById(ctx context.Context, in *GetQuestionAnswerUserByIdRequest, opts ...grpc.CallOption) (*QuestionAnswerUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionAnswerUserResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAnswerUserById_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *questionServiceClient) GetAnswerUserByUuid(ctx context.Context, in *GetQuestionAnswerUserByUuidRequest, opts ...grpc.CallOption) (*QuestionAnswerUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(QuestionAnswerUserResponse)
+	err := c.cc.Invoke(ctx, QuestionService_GetAnswerUserByUuid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QuestionServiceServer is the server API for QuestionService service.
 // All implementations must embed UnimplementedQuestionServiceServer
 // for forward compatibility.
@@ -135,6 +318,24 @@ type QuestionServiceServer interface {
 	GetById(context.Context, *GetQuestionByIdRequest) (*QuestionResponse, error)
 	GetByUuid(context.Context, *GetQuestionByUuidRequest) (*QuestionResponse, error)
 	Delete(context.Context, *GetQuestionByUuidRequest) (*ActionQuestionResponse, error)
+	// Question Setting
+	GetAllSetting(context.Context, *ListQuestionSettingRequest) (*ListQuestionSettingResponse, error)
+	CreateSetting(context.Context, *QuestionSettingRequest) (*ActionQuestionResponse, error)
+	UpdateSetting(context.Context, *QuestionSettingRequest) (*ActionQuestionResponse, error)
+	GetSettingById(context.Context, *GetQuestionSettingByIdRequest) (*QuestionSettingResponse, error)
+	GetSettingByUuid(context.Context, *GetQuestionSettingByUuidRequest) (*QuestionSettingResponse, error)
+	DeleteSetting(context.Context, *GetQuestionSettingByUuidRequest) (*ActionQuestionResponse, error)
+	// Question Answer Key
+	GetAllAnswerKey(context.Context, *ListQuestionAnswerKeyRequest) (*ListQuestionAnswerKeyResponse, error)
+	CreateAnswerKey(context.Context, *QuestionAnswerKeyRequest) (*ActionQuestionResponse, error)
+	UpdateAnswerKey(context.Context, *QuestionAnswerKeyRequest) (*ActionQuestionResponse, error)
+	GetAnswerKeyById(context.Context, *GetQuestionAnswerKeyByIdRequest) (*QuestionAnswerKeyResponse, error)
+	GetAnswerKeyByUuid(context.Context, *GetQuestionAnswerKeyByUuidRequest) (*QuestionAnswerKeyResponse, error)
+	DeleteAnswerKey(context.Context, *GetQuestionAnswerKeyByUuidRequest) (*ActionQuestionResponse, error)
+	// Question Answer User
+	GetAllAnswerUser(context.Context, *ListQuestionAnswerUserRequest) (*ListQuestionAnswerUserResponse, error)
+	GetAnswerUserById(context.Context, *GetQuestionAnswerUserByIdRequest) (*QuestionAnswerUserResponse, error)
+	GetAnswerUserByUuid(context.Context, *GetQuestionAnswerUserByUuidRequest) (*QuestionAnswerUserResponse, error)
 	mustEmbedUnimplementedQuestionServiceServer()
 }
 
@@ -165,6 +366,51 @@ func (UnimplementedQuestionServiceServer) GetByUuid(context.Context, *GetQuestio
 }
 func (UnimplementedQuestionServiceServer) Delete(context.Context, *GetQuestionByUuidRequest) (*ActionQuestionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAllSetting(context.Context, *ListQuestionSettingRequest) (*ListQuestionSettingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllSetting not implemented")
+}
+func (UnimplementedQuestionServiceServer) CreateSetting(context.Context, *QuestionSettingRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSetting not implemented")
+}
+func (UnimplementedQuestionServiceServer) UpdateSetting(context.Context, *QuestionSettingRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSetting not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetSettingById(context.Context, *GetQuestionSettingByIdRequest) (*QuestionSettingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSettingById not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetSettingByUuid(context.Context, *GetQuestionSettingByUuidRequest) (*QuestionSettingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSettingByUuid not implemented")
+}
+func (UnimplementedQuestionServiceServer) DeleteSetting(context.Context, *GetQuestionSettingByUuidRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSetting not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAllAnswerKey(context.Context, *ListQuestionAnswerKeyRequest) (*ListQuestionAnswerKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllAnswerKey not implemented")
+}
+func (UnimplementedQuestionServiceServer) CreateAnswerKey(context.Context, *QuestionAnswerKeyRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAnswerKey not implemented")
+}
+func (UnimplementedQuestionServiceServer) UpdateAnswerKey(context.Context, *QuestionAnswerKeyRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAnswerKey not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAnswerKeyById(context.Context, *GetQuestionAnswerKeyByIdRequest) (*QuestionAnswerKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnswerKeyById not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAnswerKeyByUuid(context.Context, *GetQuestionAnswerKeyByUuidRequest) (*QuestionAnswerKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnswerKeyByUuid not implemented")
+}
+func (UnimplementedQuestionServiceServer) DeleteAnswerKey(context.Context, *GetQuestionAnswerKeyByUuidRequest) (*ActionQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAnswerKey not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAllAnswerUser(context.Context, *ListQuestionAnswerUserRequest) (*ListQuestionAnswerUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllAnswerUser not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAnswerUserById(context.Context, *GetQuestionAnswerUserByIdRequest) (*QuestionAnswerUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnswerUserById not implemented")
+}
+func (UnimplementedQuestionServiceServer) GetAnswerUserByUuid(context.Context, *GetQuestionAnswerUserByUuidRequest) (*QuestionAnswerUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnswerUserByUuid not implemented")
 }
 func (UnimplementedQuestionServiceServer) mustEmbedUnimplementedQuestionServiceServer() {}
 func (UnimplementedQuestionServiceServer) testEmbeddedByValue()                         {}
@@ -313,6 +559,276 @@ func _QuestionService_Delete_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _QuestionService_GetAllSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListQuestionSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAllSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAllSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAllSetting(ctx, req.(*ListQuestionSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_CreateSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuestionSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).CreateSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_CreateSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).CreateSetting(ctx, req.(*QuestionSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_UpdateSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuestionSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).UpdateSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_UpdateSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).UpdateSetting(ctx, req.(*QuestionSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetSettingById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionSettingByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetSettingById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetSettingById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetSettingById(ctx, req.(*GetQuestionSettingByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetSettingByUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionSettingByUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetSettingByUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetSettingByUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetSettingByUuid(ctx, req.(*GetQuestionSettingByUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_DeleteSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionSettingByUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).DeleteSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_DeleteSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).DeleteSetting(ctx, req.(*GetQuestionSettingByUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAllAnswerKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListQuestionAnswerKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAllAnswerKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAllAnswerKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAllAnswerKey(ctx, req.(*ListQuestionAnswerKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_CreateAnswerKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuestionAnswerKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).CreateAnswerKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_CreateAnswerKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).CreateAnswerKey(ctx, req.(*QuestionAnswerKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_UpdateAnswerKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QuestionAnswerKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).UpdateAnswerKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_UpdateAnswerKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).UpdateAnswerKey(ctx, req.(*QuestionAnswerKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAnswerKeyById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionAnswerKeyByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAnswerKeyById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAnswerKeyById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAnswerKeyById(ctx, req.(*GetQuestionAnswerKeyByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAnswerKeyByUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionAnswerKeyByUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAnswerKeyByUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAnswerKeyByUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAnswerKeyByUuid(ctx, req.(*GetQuestionAnswerKeyByUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_DeleteAnswerKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionAnswerKeyByUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).DeleteAnswerKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_DeleteAnswerKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).DeleteAnswerKey(ctx, req.(*GetQuestionAnswerKeyByUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAllAnswerUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListQuestionAnswerUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAllAnswerUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAllAnswerUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAllAnswerUser(ctx, req.(*ListQuestionAnswerUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAnswerUserById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionAnswerUserByIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAnswerUserById(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAnswerUserById_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAnswerUserById(ctx, req.(*GetQuestionAnswerUserByIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _QuestionService_GetAnswerUserByUuid_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetQuestionAnswerUserByUuidRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QuestionServiceServer).GetAnswerUserByUuid(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: QuestionService_GetAnswerUserByUuid_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QuestionServiceServer).GetAnswerUserByUuid(ctx, req.(*GetQuestionAnswerUserByUuidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // QuestionService_ServiceDesc is the grpc.ServiceDesc for QuestionService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -347,6 +863,66 @@ var QuestionService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _QuestionService_Delete_Handler,
+		},
+		{
+			MethodName: "GetAllSetting",
+			Handler:    _QuestionService_GetAllSetting_Handler,
+		},
+		{
+			MethodName: "CreateSetting",
+			Handler:    _QuestionService_CreateSetting_Handler,
+		},
+		{
+			MethodName: "UpdateSetting",
+			Handler:    _QuestionService_UpdateSetting_Handler,
+		},
+		{
+			MethodName: "GetSettingById",
+			Handler:    _QuestionService_GetSettingById_Handler,
+		},
+		{
+			MethodName: "GetSettingByUuid",
+			Handler:    _QuestionService_GetSettingByUuid_Handler,
+		},
+		{
+			MethodName: "DeleteSetting",
+			Handler:    _QuestionService_DeleteSetting_Handler,
+		},
+		{
+			MethodName: "GetAllAnswerKey",
+			Handler:    _QuestionService_GetAllAnswerKey_Handler,
+		},
+		{
+			MethodName: "CreateAnswerKey",
+			Handler:    _QuestionService_CreateAnswerKey_Handler,
+		},
+		{
+			MethodName: "UpdateAnswerKey",
+			Handler:    _QuestionService_UpdateAnswerKey_Handler,
+		},
+		{
+			MethodName: "GetAnswerKeyById",
+			Handler:    _QuestionService_GetAnswerKeyById_Handler,
+		},
+		{
+			MethodName: "GetAnswerKeyByUuid",
+			Handler:    _QuestionService_GetAnswerKeyByUuid_Handler,
+		},
+		{
+			MethodName: "DeleteAnswerKey",
+			Handler:    _QuestionService_DeleteAnswerKey_Handler,
+		},
+		{
+			MethodName: "GetAllAnswerUser",
+			Handler:    _QuestionService_GetAllAnswerUser_Handler,
+		},
+		{
+			MethodName: "GetAnswerUserById",
+			Handler:    _QuestionService_GetAnswerUserById_Handler,
+		},
+		{
+			MethodName: "GetAnswerUserByUuid",
+			Handler:    _QuestionService_GetAnswerUserByUuid_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
